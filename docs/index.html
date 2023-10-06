@@ -11,17 +11,17 @@
 		<header>
 			<nav class="navbar navbar-dark bg-dark border-bottom border-light">
 				<div class="container-fluid">
-					<a class="navbar-brand fw-bold fs-2">Weather App</a>
+					<a class="navbar-brand fw-bold fs-1">Weather App</a>
 					<form class="d-flex">
 						<input
+							id="searchInput"
 							class="form-control rounded-4 me-2"
 							type="search"
 							placeholder="Search"
 							aria-label="Search"
 						/>
-						<button class="btn btn btn-outline-light" type="submit">
+						<button id="searchBtn" class="btn btn btn-outline-light" type="submit">
 							<i class="bi bi-search"></i>
-							</svg>
 						</button>
 					</form>
 				</div>
@@ -35,10 +35,10 @@
 							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
 							style="max-width: 18rem"
 						>
-							<div class="card-header border-bottom border-light fs-3">Header</div>
+							<div id="city1" class="card-header text-right border-light fw-bold fs-2">Header</div>
 							<div class="card-body">
-								<h5 class="card-title">Dark card title</h5>
-								<p class="card-text">
+								<h5 id="weather1" class="card-title">Dark card title</h5>
+								<p id="minMaxTemp1" class="card-text">
 									Some quick example text to build on the card title and make up the bulk of the card's
 									content.
 								</p>
@@ -50,10 +50,12 @@
 							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
 							style="max-width: 18rem"
 						>
-							<div class="card-header border-bottom border-light fs-3">Header</div>
+							<div id="city2" class="card-header text-right border-light fw-bold fs-2">Header</div>
 							<div class="card-body">
-								<h5 class="card-title">Dark card title <i class="bi bi-cloud-fog2"></i></h5>
-								<p class="card-text">
+								<h5 id="weather2" class="card-title">
+									Dark card title <i class="bi bi-cloud-fog2"></i>
+								</h5>
+								<p id="minMaxTemp2" class="card-text">
 									Some quick example text to build on the card title and make up the bulk of the card's
 									content.
 								</p>
@@ -65,10 +67,10 @@
 							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
 							style="max-width: 18rem"
 						>
-							<div class="card-header border-bottom border-light fs-3">Header</div>
+							<div id="city3" class="card-header text-right border-light fw-bold fs-2">Header</div>
 							<div class="card-body">
-								<h5 class="card-title">Dark card title</h5>
-								<p class="card-text">
+								<h5 id="weather3" class="card-title">Dark card title</h5>
+								<p id="minMaxTemp3" class="card-text">
 									Some quick example text to build on the card title and make up the bulk of the card's
 									content.
 								</p>
@@ -80,10 +82,10 @@
 							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
 							style="max-width: 18rem"
 						>
-							<div class="card-header border-bottom border-light fs-3">Header</div>
+							<div id="city4" class="card-header text-right border-light fw-bold fs-2">Header</div>
 							<div class="card-body">
-								<h5 class="card-title">Dark card title</h5>
-								<p class="card-text">
+								<h5 id="weather4" class="card-title">Dark card title</h5>
+								<p id="minMaxTemp4" class="card-text">
 									Some quick example text to build on the card title and make up the bulk of the card's
 									content.
 								</p>
@@ -95,10 +97,10 @@
 							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
 							style="max-width: 18rem"
 						>
-							<div class="card-header border-bottom border-light fs-3">Header</div>
+							<div id="city5" class="card-header text-right border-light fw-bold fs-2">Header</div>
 							<div class="card-body">
-								<h5 class="card-title">Dark card title</h5>
-								<p class="card-text">
+								<h5 id="weather5" class="card-title">Dark card title</h5>
+								<p id="minMaxTemp5" class="card-text">
 									Some quick example text to build on the card title and make up the bulk of the card's
 									content.
 								</p>
@@ -113,12 +115,26 @@
 								class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
 								style="max-width: 80rem"
 							>
-								<div class="card-header border-bottom border-light fs-3">Header</div>
+								<div id="mainCity" class="card-header text-right border-light fw-bold fs-2">Header</div>
 								<div class="card-body">
-									<h5 class="card-title">Dark card title</h5>
-									<p class="card-text">
+									<h5 id="weatherMain" class="card-title">Dark card title</h5>
+									<p id="minMaxTempMain" class="card-text">
 										Some quick example text to build on the card title and make up the bulk of the card's
-										content.
+										content. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum labore, soluta
+										veniam vitae impedit mollitia molestiae. Quos earum similique optio velit corporis ex
+										aut ipsum, nam cum sequi quam minima.Lorem, ipsum dolor sit amet consectetur
+										adipisicing elit. Cum labore, soluta veniam vitae impedit mollitia molestiae. Quos
+										earum similique optio velit corporis ex aut ipsum, nam cum sequi quam minima.Lorem,
+										ipsum dolor sit amet consectetur adipisicing elit. Cum labore, soluta veniam vitae
+										impedit mollitia molestiae. Quos earum similique optio velit corporis ex aut ipsum,
+										nam cum sequi quam minima.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+										Cum labore, soluta veniam vitae impedit mollitia molestiae. Quos earum similique
+										optio velit corporis ex aut ipsum, nam cum sequi quam minima.Lorem, ipsum dolor sit
+										amet consectetur adipisicing elit. Cum labore, soluta veniam vitae impedit mollitia
+										molestiae. Quos earum similique optio velit corporis ex aut ipsum, nam cum sequi quam
+										minima.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum labore, soluta
+										veniam vitae impedit mollitia molestiae. Quos earum similique optio velit corporis ex
+										aut ipsum, nam cum sequi quam minima.
 									</p>
 								</div>
 							</div>
@@ -128,6 +144,11 @@
 			</div>
 		</main>
 		<footer>
+			<script
+				src="https://code.jquery.com/jquery-3.7.1.min.js"
+				integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+				crossorigin="anonymous"
+			></script>
 			<script src="./js/script.js"></script>
 		</footer>
 	</body>
