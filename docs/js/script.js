@@ -1,5 +1,4 @@
-const apiKey = "e91ae94cc6f3044467c0535728f93ec9";
-const latLon = ["", ""];
+import { weatherAppApiKey, citiesApiKey } from "../../apikey.js";
 const weatherIcons = ["bi-cloud", " bi-cloud-drizzle", "bi-cloud haze2", "bi-brightness-high-fill"];
 const htmlSelectors = {
 	city1: [$("#city1"), $("#weather1"), $("#minMaxTemp1")],
@@ -11,7 +10,7 @@ const htmlSelectors = {
 	citySearch: $("#searchInput"),
 	searchButton: $("#searchBtn"),
 };
-const citiesApiKey = "9hKrCsPf9ywx3SbE9TFTJg==BXKWJNLweT6aadEz";
+
 if (
 	htmlSelectors.searchButton.click(function (event) {
 		event.preventDefault();
@@ -32,15 +31,15 @@ if (
 				return response.json();
 			})
 			.then((result) => {
-				console.log(result);
-				console.log(result[0].latitude);
-				console.log(result[0].longitude);
+				// console.log(result);
+				// console.log(result[0].latitude);
+				// console.log(result[0].longitude);
 				fetch(
-					`https://api.openweathermap.org/data/2.5/weather?lat=${result[0].latitude}&lon=${result[0].longitude}&appid=e91ae94cc6f3044467c0535728f93ec9`
+					`https://api.openweathermap.org/data/2.5/weather?lat=${result[0].latitude}&lon=${result[0].longitude}&appid=${weatherAppApiKey}`
 				)
 					.then((response) => response.json())
-					.then((data) => {
-						console.log(data);
+					.then((weatherData) => {
+						console.log(weatherData);
 					})
 					.catch((error) => {
 						console.log(`error: ${error}`);
