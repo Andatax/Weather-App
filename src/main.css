@@ -5103,7 +5103,7 @@ fieldset:disabled .btn {
 	--bs-list-group-color: var(--bs-body-color);
 	--bs-list-group-bg: var(--bs-body-bg);
 	--bs-list-group-border-color: var(--bs-border-color);
-	--bs-list-group-border-width: var(--bs-border-width);
+	/* --bs-list-group-border-width: var(--bs-border-width); */
 	--bs-list-group-border-radius: var(--bs-border-radius);
 	--bs-list-group-item-padding-x: 1rem;
 	--bs-list-group-item-padding-y: 0.5rem;
@@ -5122,6 +5122,7 @@ fieldset:disabled .btn {
 	padding-left: 0;
 	margin-bottom: 0;
 	border-radius: var(--bs-list-group-border-radius);
+	list-style: none;
 }
 
 .list-group-numbered {
@@ -5156,7 +5157,7 @@ fieldset:disabled .btn {
 	padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
 	color: var(--bs-list-group-color);
 	text-decoration: none;
-	background-color: var(--bs-list-group-bg);
+	/* background-color: var(--bs-list-group-bg); */
 	border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
 }
 .list-group-item:first-child {
@@ -7676,9 +7677,9 @@ fieldset:disabled .btn {
 	border-right: 0 !important;
 }
 
-.border-bottom {
+/* .border-bottom {
 	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-}
+} */
 
 .border-bottom-0 {
 	border-bottom: 0 !important;
