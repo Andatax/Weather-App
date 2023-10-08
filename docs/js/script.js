@@ -105,20 +105,14 @@ if (
 					.then((weatherData) => {
 						console.log(weatherData);
 						htmlSelectors.day1[0].text(`${input}`);
-						htmlSelectors.day1[1].text(weatherData.list[5].weather[0].description);
-
-						// Adding icon by class to DOM not working
-						let matchingKey = "";
-						Object.keys(weatherIcons).forEach((keys) => {
-							console.log(weatherData.list[5].weather[0].icon, keys);
-							if (weatherData.list[5].weather[0].icon === keys) {
-								matchingKey = Object.keys(weatherIcons).find((key) => weatherIcons[key] === keys);
-								console.log("Matching Key:", matchingKey);
-								htmlSelectors.day1[2].addClass(matchingKey);
-								return;
+						htmlSelectors.day1[1].text(weatherData.list[5].weather[0].description.toUpperCase());
+						for (const key in weatherIcons) {
+							if (key === weatherData.list[5].weather[0].icon) {
+								console.log(key);
+								let icon = weatherIcons[key];
+								htmlSelectors.day1[2].addClass(icon.toString());
 							}
-						});
-						//--------------------------------------------------------------
+						}
 						htmlSelectors.day1[3].text(
 							"TEMPERATURE: " + Math.ceil(weatherData.list[5].main.temp - 273.15) + " °C"
 						);
@@ -130,7 +124,7 @@ if (
 								" °C"
 						);
 						htmlSelectors.day1[5].text("WIND: " + Math.ceil(weatherData.list[5].wind.speed) + " m/s");
-						htmlSelectors.day1[5].text(
+						htmlSelectors.day1[6].text(
 							"HUMIDITY: " + Math.ceil(weatherData.list[5].main.humidity) + " %"
 						);
 					})
