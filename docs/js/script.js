@@ -21,7 +21,7 @@ const weatherIcons = {
 };
 const htmlSelectors = {
 	day1: [
-		$("#city1"),
+		$("#day1"),
 		$("#weather1"),
 		$("#weatherIcon1"),
 		$("#temp1"),
@@ -30,7 +30,7 @@ const htmlSelectors = {
 		$("#humidity1"),
 	],
 	day2: [
-		$("#city2"),
+		$("#day2"),
 		$("#weather2"),
 		$("#weatherIcon2"),
 		$("#temp2"),
@@ -39,7 +39,7 @@ const htmlSelectors = {
 		$("#humidity2"),
 	],
 	day3: [
-		$("#city3"),
+		$("#day3"),
 		$("#weather3"),
 		$("#weatherIcon3"),
 		$("#temp3"),
@@ -48,7 +48,7 @@ const htmlSelectors = {
 		$("#humidity3"),
 	],
 	day4: [
-		$("#city4"),
+		$("#day4"),
 		$("#weather4"),
 		$("#weatherIcon4"),
 		$("#temp4"),
@@ -57,7 +57,7 @@ const htmlSelectors = {
 		$("#humidity4"),
 	],
 	day5: [
-		$("#city5"),
+		$("#day5"),
 		$("#weather5"),
 		$("#weatherIcon5"),
 		$("#temp5"),
@@ -66,7 +66,7 @@ const htmlSelectors = {
 		$("#humidity5"),
 	],
 	dayMain: [
-		$("#mainCity"),
+		$("#mainDay"),
 		$("#weatherMain"),
 		$("#weatherIconMain"),
 		$("#tempMain"),
@@ -103,29 +103,43 @@ if (
 				)
 					.then((response) => response.json())
 					.then((weatherData) => {
-						console.log(weatherData);
-						htmlSelectors.day1[0].text(`${input}`);
-						htmlSelectors.day1[1].text(weatherData.list[5].weather[0].description.toUpperCase());
+						updateWeatherCard(weatherData, 5, 1);
+						updateWeatherCard(weatherData, 13, 2);
+						updateWeatherCard(weatherData, 21, 3);
+						updateWeatherCard(weatherData, 29, 4);
+						updateWeatherCard(weatherData, 37, 5);
+					})
+					.catch((error) => {
+						console.log(`error: ${error}`);
+					});
+				fetch(
+					`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherAppApiKey}`
+				)
+					.then((response) => response.json())
+					.then((currentWeatherData) => {
+						console.log(currentWeatherData);
+						htmlSelectors.dayMain[0].text(`${input}`);
+						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
-							if (key === weatherData.list[5].weather[0].icon) {
+							if (key === currentWeatherData.weather[0].icon) {
 								console.log(key);
 								let icon = weatherIcons[key];
-								htmlSelectors.day1[2].addClass(icon.toString());
+								htmlSelectors.dayMain[2].addClass(icon.toString());
 							}
 						}
-						htmlSelectors.day1[3].text(
-							"TEMPERATURE: " + Math.ceil(weatherData.list[5].main.temp - 273.15) + " °C"
+						htmlSelectors.dayMain[3].text(
+							"TEMPERATURE: " + Math.ceil(currentWeatherData.main.temp - 273.15) + " °C"
 						);
-						htmlSelectors.day1[4].text(
+						htmlSelectors.dayMain[4].text(
 							"MAX/MIN: " +
-								Math.floor(weatherData.list[3].main.temp_max - 273.15) +
+								Math.floor(currentWeatherData.main.temp_max - 273.15) +
 								" °C " +
-								Math.ceil(weatherData.list[7].main.temp_min - 273.15) +
+								Math.ceil(currentWeatherData.main.temp_min - 273.15) +
 								" °C"
 						);
-						htmlSelectors.day1[5].text("WIND: " + Math.ceil(weatherData.list[5].wind.speed) + " m/s");
-						htmlSelectors.day1[6].text(
-							"HUMIDITY: " + Math.ceil(weatherData.list[5].main.humidity) + " %"
+						htmlSelectors.dayMain[5].text("WIND: " + Math.ceil(currentWeatherData.wind.speed) + " m/s");
+						htmlSelectors.dayMain[6].text(
+							"HUMIDITY: " + Math.ceil(currentWeatherData.main.humidity) + " %"
 						);
 					})
 					.catch((error) => {
@@ -138,3 +152,35 @@ if (
 			});
 	})
 );
+
+const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
+	console.log(weatherData);
+	let date = weatherData.list[listIndex].dt_txt;
+	htmlSelectors[`day${dayIndex}`][0].text(`${date.slice(5, 10)}`);
+	htmlSelectors[`day${dayIndex}`][1].text(
+		weatherData.list[listIndex].weather[0].description.toUpperCase()
+	);
+	for (const key in weatherIcons) {
+		if (key === weatherData.list[listIndex].weather[0].icon) {
+			console.log(key);
+			let icon = weatherIcons[key];
+			htmlSelectors[`day${dayIndex}`][2].addClass(icon.toString());
+		}
+	}
+	htmlSelectors[`day${dayIndex}`][3].text(
+		"TEMPERATURE: " + Math.ceil(weatherData.list[listIndex].main.temp - 273.15) + " °C"
+	);
+	htmlSelectors[`day${dayIndex}`][4].text(
+		"MAX/MIN: " +
+			Math.floor(weatherData.list[listIndex - 2].main.temp_max - 273.15) +
+			" °C " +
+			Math.ceil(weatherData.list[listIndex + 2].main.temp_min - 273.15) +
+			" °C"
+	);
+	htmlSelectors[`day${dayIndex}`][5].text(
+		"WIND: " + Math.ceil(weatherData.list[listIndex].wind.speed) + " m/s"
+	);
+	htmlSelectors[`day${dayIndex}`][6].text(
+		"HUMIDITY: " + Math.ceil(weatherData.list[listIndex].main.humidity) + " %"
+	);
+};
