@@ -155,8 +155,8 @@ if (
 
 const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 	console.log(weatherData);
-	let date = weatherData.list[listIndex].dt_txt;
-	htmlSelectors[`day${dayIndex}`][0].text(`${date.slice(5, 10)}`);
+	let date = weatherData.list[listIndex].dt;
+	htmlSelectors[`day${dayIndex}`][0].text(`${timeConverter(date)}`);
 	htmlSelectors[`day${dayIndex}`][1].text(
 		weatherData.list[listIndex].weather[0].description.toUpperCase()
 	);
@@ -184,3 +184,13 @@ const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 		"HUMIDITY: " + Math.ceil(weatherData.list[listIndex].main.humidity) + " %"
 	);
 };
+function timeConverter(UNIX_timestamp) {
+	var a = new Date(UNIX_timestamp * 1000);
+	var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	var year = a.getFullYear();
+	var month = months[a.getMonth()];
+	var day = a.getDate();
+	var date = day + " " + month + ", " + year;
+	return date;
+}
+console.log(timeConverter(1645936000));

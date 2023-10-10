@@ -8523,6 +8523,10 @@ fieldset:disabled .btn {
 	font-family: var(--bs-font-monospace) !important;
 }
 
+.fs-main-i {
+	font-size: calc(2.8rem + 3.2vw) !important;
+}
+
 .fs-1 {
 	font-size: calc(1.375rem + 1.5vw) !important;
 }
@@ -8980,9 +8984,13 @@ fieldset:disabled .btn {
 	background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
+.bg-dark-gradient {
+	--bs-bg-opacity: 1;
+	background: radial-gradient(circle, rgba(38, 38, 38, 1) 27%, rgba(13, 12, 13, 1) 98%) !important;
+}
 .bg-dark {
 	--bs-bg-opacity: 1;
-	background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+	background: linear-gradient(90deg, rgba(28, 28, 28, 1) 41%, rgba(24, 24, 24, 1) 99%) !important;
 }
 
 .bg-black {
