@@ -1,0 +1,172 @@
+<!DOCTYPE text/html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Weather App</title>
+
+		<link rel="stylesheet" href="../src/main.css" />
+	</head>
+	<body class="bg-dark-gradient text-white">
+		<header>
+			<nav class="navbar navbar-dark bg-dark-gradients border-bottom border-light">
+				<div class="container-fluid">
+					<a class="navbar-brand fw-bold fs-1">Weather App</a>
+					<form class="d-flex">
+						<input
+							id="searchInput"
+							class="form-control rounded-4 me-2"
+							type="search"
+							placeholder="Search"
+							aria-label="Search"
+						/>
+						<button id="searchBtn" class="btn btn btn-outline-light" type="submit">
+							<i class="bi bi-search"></i>
+						</button>
+					</form>
+				</div>
+			</nav>
+		</header>
+		<main>
+			<div class="container-fluid p-3">
+				<div class="container py-5" style="max-height: 30rem">
+					<div class="row">
+						<div class="col">
+							<div
+								class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
+								style="max-width: 80rem"
+							>
+								<div id="mainDay" class="card-header text-right border-light fw-bold fs-2">City</div>
+								<div class="card-body">
+									<div class="d-flex justify-content-around">
+										<div>
+											<h5 id="weatherMain" class="card-title">Weather Info</h5>
+
+											<ul class="list-group list-group-flush">
+												<li id="tempMain" class="card-text list-group-item-dark"></li>
+												<li id="minMaxTempMain" class="card-text list-group-item-dark"></li>
+												<li id="windMain" class="card-text list-group-item-dark"></li>
+												<li id="humidityMain" class="card-text list-group-item-dark"></li>
+											</ul>
+										</div>
+										<i id="weatherIconMain" class="fs-main-i bi"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div
+							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
+							style="max-width: 18rem"
+						>
+							<div id="day1" class="card-header text-right border-light fw-bold fs-2">Date</div>
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h5 id="weather1" class="card-title">Weather Info</h5>
+									<i id="weatherIcon1" class="bi"></i>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li id="temp1" class="card-text list-group-item-dark"></li>
+									<li id="minMaxTemp1" class="card-text list-group-item-dark"></li>
+									<li id="wind1" class="card-text list-group-item-dark"></li>
+									<li id="humidity1" class="card-text list-group-item-dark"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div
+							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
+							style="max-width: 18rem"
+						>
+							<div id="day2" class="card-header text-right border-light fw-bold fs-2">Date</div>
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h5 id="weather2" class="card-title">Weather Info</h5>
+									<i id="weatherIcon2" class="bi"></i>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li id="temp2" class="card-text list-group-item-dark"></li>
+									<li id="minMaxTemp2" class="card-text list-group-item-dark"></li>
+									<li id="wind2" class="card-text list-group-item-dark"></li>
+									<li id="humidity2" class="card-text list-group-item-dark"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div
+							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
+							style="max-width: 18rem"
+						>
+							<div id="day3" class="card-header text-right border-light fw-bold fs-2">Date</div>
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h5 id="weather3" class="card-title">Weather Info</h5>
+									<i id="weatherIcon3" class="bi"></i>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li id="temp3" class="card-text list-group-item-dark"></li>
+									<li id="minMaxTemp3" class="card-text list-group-item-dark"></li>
+									<li id="wind3" class="card-text list-group-item-dark"></li>
+									<li id="humidity3" class="card-text list-group-item-dark"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div
+							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
+							style="max-width: 18rem"
+						>
+							<div id="day4" class="card-header text-right border-light fw-bold fs-2">Date</div>
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h5 id="weather4" class="card-title">Weather Info</h5>
+									<i id="weatherIcon4" class="bi"></i>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li id="temp4" class="card-text list-group-item-dark"></li>
+									<li id="minMaxTemp4" class="card-text list-group-item-dark"></li>
+									<li id="wind4" class="card-text list-group-item-dark"></li>
+									<li id="humidity4" class="card-text list-group-item-dark"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div
+							class="shadow card p-3 text-white bg-dark mb-3 border rounded-4 border-light"
+							style="max-width: 18rem"
+						>
+							<div id="day5" class="card-header text-right border-light fw-bold fs-2">Date</div>
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h5 id="weather5" class="card-title">Weather Info</h5>
+									<i id="weatherIcon5" class="bi"></i>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li id="temp5" class="card-text list-group-item-dark"></li>
+									<li id="minMaxTemp5" class="card-text list-group-item-dark"></li>
+									<li id="wind5" class="card-text list-group-item-dark"></li>
+									<li id="humidity5" class="card-text list-group-item-dark"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<script
+				src="https://code.jquery.com/jquery-3.7.1.min.js"
+				integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+				crossorigin="anonymous"
+			></script>
+			<script src="../dist/bundle.js" type="module"></script>
+		</footer>
+	</body>
+</html>
