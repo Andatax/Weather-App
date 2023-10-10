@@ -1,7 +1,7 @@
-import { weatherAppApiKey, citiesApiKey } from '../../apikey.js';
 import 'dotenv/config';
-// console.log(process.env.API_KEY_1);
-// console.log(process.env.API_KEY_2);
+const weatherAppApiKey = process.env.API_KEY_1;
+const citiesApiKey = process.env.API_KEY_2;
+
 const weatherIcons = {
 	'04n': 'bi-clouds',
 	'04d': 'bi-clouds',
@@ -86,7 +86,7 @@ if (
 		event.preventDefault();
 
 		let input = htmlSelectors.citySearch.val();
-		console.log(input);
+		// console.log(input);
 		fetch('https://api.api-ninjas.com/v1/city?name=' + input, {
 			method: 'GET',
 			headers: {
@@ -98,7 +98,7 @@ if (
 				return response.json();
 			})
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 				let lat = result[0].latitude ? result[0].latitude.toString() : null;
 				let lon = result[0].longitude ? result[0].longitude.toString() : null;
 				fetch(
@@ -120,12 +120,12 @@ if (
 				)
 					.then((response) => response.json())
 					.then((currentWeatherData) => {
-						console.log(currentWeatherData);
+						// console.log(currentWeatherData);
 						htmlSelectors.dayMain[0].text(`${input}`);
 						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
 							if (key === currentWeatherData.weather[0].icon) {
-								console.log(key);
+								// console.log(key);
 								let icon = weatherIcons[key];
 								htmlSelectors.dayMain[2].addClass(icon.toString());
 							}
@@ -157,7 +157,7 @@ if (
 );
 
 const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
-	console.log(weatherData);
+	// console.log(weatherData);
 	let date = weatherData.list[listIndex].dt;
 	htmlSelectors[`day${dayIndex}`][0].text(`${timeConverter(date)}`);
 	htmlSelectors[`day${dayIndex}`][1].text(
@@ -165,7 +165,7 @@ const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 	);
 	for (const key in weatherIcons) {
 		if (key === weatherData.list[listIndex].weather[0].icon) {
-			console.log(key);
+			// console.log(key);
 			let icon = weatherIcons[key];
 			htmlSelectors[`day${dayIndex}`][2].addClass(icon.toString());
 		}
@@ -196,4 +196,3 @@ function timeConverter(UNIX_timestamp) {
 	var date = day + ' ' + month + ', ' + year;
 	return date;
 }
-console.log(timeConverter(1645936000));
