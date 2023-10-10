@@ -1,7 +1,7 @@
 import { weatherAppApiKey, citiesApiKey } from '../../apikey.js';
 import 'dotenv/config';
-console.log(process.env.API_KEY_1);
-console.log(process.env.API_KEY_2);
+// console.log(process.env.API_KEY_1);
+// console.log(process.env.API_KEY_2);
 const weatherIcons = {
 	'04n': 'bi-clouds',
 	'04d': 'bi-clouds',
