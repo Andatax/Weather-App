@@ -98,7 +98,7 @@ if (
 				return response.json();
 			})
 			.then((result) => {
-				// console.log(result);
+				console.log(result);
 				let lat = result[0].latitude ? result[0].latitude.toString() : null;
 				let lon = result[0].longitude ? result[0].longitude.toString() : null;
 				fetch(
@@ -121,7 +121,7 @@ if (
 					.then((response) => response.json())
 					.then((currentWeatherData) => {
 						// console.log(currentWeatherData);
-						htmlSelectors.dayMain[0].text(`${input}`);
+						htmlSelectors.dayMain[0].text(`${result[0].name.toUpperCase()}`);
 						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
 							if (key === currentWeatherData.weather[0].icon) {
