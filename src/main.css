@@ -116,7 +116,7 @@
 	--bs-border-radius-xxl: 2rem;
 	--bs-border-radius-2xl: var(--bs-border-radius-xxl);
 	--bs-border-radius-pill: 50rem;
-	--bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.747);
+	--bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 	--bs-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 	--bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 	--bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
@@ -7677,9 +7677,9 @@ fieldset:disabled .btn {
 	border-right: 0 !important;
 }
 
-/* .border-bottom {
+.border-bottom {
 	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-} */
+}
 
 .border-bottom-0 {
 	border-bottom: 0 !important;
@@ -8983,7 +8983,6 @@ fieldset:disabled .btn {
 	--bs-bg-opacity: 1;
 	background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
-
 .bg-dark-gradient {
 	--bs-bg-opacity: 1;
 	background: radial-gradient(circle, rgba(38, 38, 38, 1) 27%, rgba(13, 12, 13, 1) 98%) !important;
