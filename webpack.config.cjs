@@ -3,7 +3,7 @@ const Dotenv = require('dotenv-webpack');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: './docs//js/script.js', // The entry point of your application
 	output: {
 		path: path.resolve(__dirname, 'dist'), // The output directory for bundled files
