@@ -1,8 +1,5 @@
-import 'dotenv/config';
-
-// Get the API keys from the environment variables
-const weatherAppApiKey = process.env.API_KEY_1;
-const citiesApiKey = process.env.API_KEY_2;
+const weatherAppApiKey = 'fe0b392100981c0ca23437f4c874b5e8';
+const citiesApiKey = 'UV6648NeZT4RY5GoyCFnDSijoyoNqcMMuF33K3fD';
 
 // Define an object that maps weather icons to their corresponding CSS classes
 const weatherIcons = {
@@ -133,8 +130,7 @@ if (
 				)
 					.then((response) => response.json())
 					.then((currentWeatherData) => {
-						// console.log(currentWeatherData);
-						// Update main weather card with the current weather
+						console.log(currentWeatherData);
 						htmlSelectors.dayMain[0].text(`${result[0].name.toUpperCase()}`);
 						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
@@ -171,8 +167,7 @@ if (
 );
 
 const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
-	// console.log(weatherData);
-	// Fuction that updates weather card for a specific day
+	console.log(weatherData);
 	let date = weatherData.list[listIndex].dt;
 	htmlSelectors[`day${dayIndex}`][0].text(`${timeConverter(date)}`);
 	htmlSelectors[`day${dayIndex}`][1].text(
