@@ -1,6 +1,7 @@
 const weatherAppApiKey = 'fe0b392100981c0ca23437f4c874b5e8';
 const citiesApiKey = 'UV6648NeZT4RY5GoyCFnDSijoyoNqcMMuF33K3fD';
 
+// Define an object that maps weather icons to their corresponding CSS classes
 const weatherIcons = {
 	'04n': 'bi-clouds',
 	'04d': 'bi-clouds',
@@ -21,6 +22,9 @@ const weatherIcons = {
 	'50n': 'bi-cloud-fog',
 	'50d': 'bi-cloud-fog',
 };
+
+// Define an object that stores HTML selectors for various elements on the page
+// These selectors are used to update the HTML elements with the corresponding data
 const htmlSelectors = {
 	day1: [
 		$('#day1'),
@@ -86,6 +90,9 @@ if (
 
 		let input = htmlSelectors.citySearch.val();
 		// console.log(input);
+
+		// Make a request to the cities API to get the latitude and longitude of the input city
+
 		fetch('https://api.api-ninjas.com/v1/city?name=' + input, {
 			method: 'GET',
 			headers: {
@@ -97,7 +104,10 @@ if (
 				return response.json();
 			})
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
+
+				// Extract the latitude and longitude from the API response
+
 				let lat = result[0].latitude ? result[0].latitude.toString() : null;
 				let lon = result[0].longitude ? result[0].longitude.toString() : null;
 				fetch(
@@ -105,6 +115,7 @@ if (
 				)
 					.then((response) => response.json())
 					.then((weatherData) => {
+						// Update weather card for each day
 						updateWeatherCard(weatherData, 5, 1);
 						updateWeatherCard(weatherData, 13, 2);
 						updateWeatherCard(weatherData, 21, 3);
@@ -186,6 +197,9 @@ const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 		'HUMIDITY: ' + Math.ceil(weatherData.list[listIndex].main.humidity) + ' %'
 	);
 };
+
+// Converts a UNIX timestamp to a formatted date string
+// Main part of the function timeConverter was taken from stack overflow and it was adapted to my code and my logic
 function timeConverter(UNIX_timestamp) {
 	var a = new Date(UNIX_timestamp * 1000);
 	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
