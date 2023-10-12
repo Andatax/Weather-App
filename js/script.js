@@ -1,7 +1,10 @@
 import 'dotenv/config';
+
+// Get the API keys from the environment variables
 const weatherAppApiKey = process.env.API_KEY_1;
 const citiesApiKey = process.env.API_KEY_2;
 
+// Define an object that maps weather icons to their corresponding CSS classes
 const weatherIcons = {
 	'04n': 'bi-clouds',
 	'04d': 'bi-clouds',
@@ -22,6 +25,9 @@ const weatherIcons = {
 	'50n': 'bi-cloud-fog',
 	'50d': 'bi-cloud-fog',
 };
+
+// Define an object that stores HTML selectors for various elements on the page
+// These selectors are used to update the HTML elements with the corresponding data
 const htmlSelectors = {
 	day1: [
 		$('#day1'),
@@ -87,6 +93,9 @@ if (
 
 		let input = htmlSelectors.citySearch.val();
 		// console.log(input);
+
+		// Make a request to the cities API to get the latitude and longitude of the input city
+
 		fetch('https://api.api-ninjas.com/v1/city?name=' + input, {
 			method: 'GET',
 			headers: {
@@ -98,7 +107,10 @@ if (
 				return response.json();
 			})
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
+
+				// Extract the latitude and longitude from the API response
+
 				let lat = result[0].latitude ? result[0].latitude.toString() : null;
 				let lon = result[0].longitude ? result[0].longitude.toString() : null;
 				fetch(
@@ -106,6 +118,7 @@ if (
 				)
 					.then((response) => response.json())
 					.then((weatherData) => {
+						// Update weather card for each day
 						updateWeatherCard(weatherData, 5, 1);
 						updateWeatherCard(weatherData, 13, 2);
 						updateWeatherCard(weatherData, 21, 3);
@@ -121,6 +134,7 @@ if (
 					.then((response) => response.json())
 					.then((currentWeatherData) => {
 						// console.log(currentWeatherData);
+						// Update main weather card with the current weather
 						htmlSelectors.dayMain[0].text(`${result[0].name.toUpperCase()}`);
 						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
@@ -158,6 +172,7 @@ if (
 
 const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 	// console.log(weatherData);
+	// Fuction that updates weather card for a specific day
 	let date = weatherData.list[listIndex].dt;
 	htmlSelectors[`day${dayIndex}`][0].text(`${timeConverter(date)}`);
 	htmlSelectors[`day${dayIndex}`][1].text(
@@ -187,6 +202,9 @@ const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 		'HUMIDITY: ' + Math.ceil(weatherData.list[listIndex].main.humidity) + ' %'
 	);
 };
+
+// Converts a UNIX timestamp to a formatted date string
+// Main part of the function timeConverter was taken from stack overflow and it was adapted to my code and my logic
 function timeConverter(UNIX_timestamp) {
 	var a = new Date(UNIX_timestamp * 1000);
 	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
