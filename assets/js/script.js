@@ -1,6 +1,5 @@
-import 'dotenv/config';
-const weatherAppApiKey = process.env.API_KEY_1;
-const citiesApiKey = process.env.API_KEY_2;
+const weatherAppApiKey = 'fe0b392100981c0ca23437f4c874b5e8';
+const citiesApiKey = 'UV6648NeZT4RY5GoyCFnDSijoyoNqcMMuF33K3fD';
 
 const weatherIcons = {
 	'04n': 'bi-clouds',
@@ -120,7 +119,7 @@ if (
 				)
 					.then((response) => response.json())
 					.then((currentWeatherData) => {
-						// console.log(currentWeatherData);
+						console.log(currentWeatherData);
 						htmlSelectors.dayMain[0].text(`${result[0].name.toUpperCase()}`);
 						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
@@ -157,7 +156,7 @@ if (
 );
 
 const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
-	// console.log(weatherData);
+	console.log(weatherData);
 	let date = weatherData.list[listIndex].dt;
 	htmlSelectors[`day${dayIndex}`][0].text(`${timeConverter(date)}`);
 	htmlSelectors[`day${dayIndex}`][1].text(
