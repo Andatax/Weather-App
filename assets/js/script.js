@@ -105,7 +105,9 @@ if (
 			})
 			.then((result) => {
 				// console.log(result);
-
+				if (result.length === 0) {
+					alert('City not found');
+				}
 				// Extract the latitude and longitude from the API response
 
 				let lat = result[0].latitude ? result[0].latitude.toString() : null;
@@ -116,11 +118,11 @@ if (
 					.then((response) => response.json())
 					.then((weatherData) => {
 						// Update weather card for each day
-						updateWeatherCard(weatherData, 5, 1);
-						updateWeatherCard(weatherData, 13, 2);
-						updateWeatherCard(weatherData, 21, 3);
-						updateWeatherCard(weatherData, 29, 4);
-						updateWeatherCard(weatherData, 37, 5);
+						for (let i = 0; i < 5; i++) {
+							let index = 5 + i * 8;
+							let dayi = i + 1;
+							updateWeatherCard(weatherData, index, dayi);
+						}
 					})
 					.catch((error) => {
 						console.log(`error: ${error}`);
