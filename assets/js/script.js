@@ -106,7 +106,7 @@ if (
 			.then((result) => {
 				// console.log(result);
 				if (result.length === 0) {
-					alert("City not found");
+					alert("City not found, please try again");
 				}
 				// Extract the latitude and longitude from the API response
 
@@ -156,6 +156,16 @@ if (
 						htmlSelectors.dayMain[6].text(
 							"HUMIDITY: " + Math.ceil(currentWeatherData.main.humidity) + " %"
 						);
+						const mainCardData = {
+							name: result[0].name.toUpperCase(),
+							description: currentWeatherData.weather[0].description.toUpperCase(),
+							temperature: Math.ceil(currentWeatherData.main.temp - 273.15),
+							maxTemperature: Math.floor(currentWeatherData.main.temp_max - 273.15),
+							minTemperature: Math.ceil(currentWeatherData.main.temp_min - 273.15),
+							windSpeed: Math.ceil(currentWeatherData.wind.speed),
+							humidity: Math.ceil(currentWeatherData.main.humidity),
+						};
+						window.localStorage.setItem("mainCardData", JSON.stringify(mainCardData));
 					})
 					.catch((error) => {
 						console.log(`error: ${error}`);
@@ -167,10 +177,14 @@ if (
 			});
 	})
 );
+htmlSelectors.searchButton.click(function (event) {
+	event.preventDefault();
+
+	clearScoresLocalStorage("savedCards");
+	clearScoresLocalStorage("mainCardData");
+});
 
 const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
-	// Other code...
-
 	const temperature = Math.ceil(weatherData.list[listIndex].main.temp - 273.15);
 	const maxTemperature = Math.floor(weatherData.list[listIndex - 2].main.temp_max - 273.15);
 	const minTemperature = Math.ceil(weatherData.list[listIndex + 2].main.temp_min - 273.15);
@@ -208,7 +222,6 @@ const updateWeatherCard = (weatherData, listIndex, dayIndex) => {
 	);
 	htmlSelectors[`day${dayIndex}`][5].text("WIND: " + windSpeed + " m/s");
 	htmlSelectors[`day${dayIndex}`][6].text("HUMIDITY: " + humidity + " %");
-	return cardData;
 };
 
 let saveCards = (cardData) => {
@@ -217,6 +230,57 @@ let saveCards = (cardData) => {
 	window.localStorage.setItem("savedCards", JSON.stringify(savedCards));
 };
 
+const clearScoresLocalStorage = (keydata) => {
+	window.localStorage.removeItem(`${keydata}`);
+};
+
+const displayStoredData = () => {
+	const savedCards = JSON.parse(localStorage.getItem("savedCards"));
+	const mainCardData = JSON.parse(localStorage.getItem("mainCardData"));
+
+	if (savedCards) {
+		// Loop through each saved card data and update the corresponding DOM elements
+		savedCards.forEach((cardData, index) => {
+			const dayIndex = index + 1;
+			const cardSelectors = htmlSelectors[`day${dayIndex}`];
+			const {
+				temperature,
+				maxTemperature,
+				minTemperature,
+				windSpeed,
+				humidity,
+				description,
+				date,
+				icon,
+			} = cardData;
+
+			cardSelectors[0].text(date);
+			cardSelectors[1].text(description);
+			cardSelectors[2].removeClass().addClass(icon.toString());
+			cardSelectors[3].text("TEMPERATURE: " + temperature + " °C");
+			cardSelectors[4].text("MAX/MIN: " + maxTemperature + " °C " + minTemperature + " °C");
+			cardSelectors[5].text("WIND: " + windSpeed + " m/s");
+			cardSelectors[6].text("HUMIDITY: " + humidity + " %");
+		});
+	}
+
+	if (mainCardData) {
+		const mainCardSelectors = htmlSelectors.dayMain;
+		const { name, description, temperature, maxTemperature, minTemperature, windSpeed, humidity } =
+			mainCardData;
+
+		mainCardSelectors[0].text(name);
+		mainCardSelectors[1].text(description);
+		mainCardSelectors[2].removeClass().addClass(weatherIcons[description.toLowerCase()]);
+		mainCardSelectors[3].text("TEMPERATURE: " + temperature + " °C");
+		mainCardSelectors[4].text("MAX/MIN: " + maxTemperature + " °C " + minTemperature + " °C");
+		mainCardSelectors[5].text("WIND: " + windSpeed + " m/s");
+		mainCardSelectors[6].text("HUMIDITY: " + humidity + " %");
+	}
+};
+
+// Call the function to display the stored data in the DOM cards
+displayStoredData();
 // Converts a UNIX timestamp to a formatted date string
 // Main part of the function timeConverter was taken from stack overflow and it was adapted to my code and my logic
 function timeConverter(UNIX_timestamp) {
