@@ -5,7 +5,7 @@ const citiesApiKey = "UV6648NeZT4RY5GoyCFnDSijoyoNqcMMuF33K3fD";
 const weatherIcons = {
 	"04n": "bi-clouds",
 	"04d": "bi-clouds",
-	"09n": " bi-cloud-drizzle",
+	"09n": "bi-cloud-drizzle",
 	"09d": "bi-cloud-drizzle",
 	"10n": "bi-cloud-rain-heavy-fill",
 	"10d": "bi-cloud-rain-heavy-fill",
@@ -133,6 +133,16 @@ if (
 					.then((response) => response.json())
 					.then((currentWeatherData) => {
 						console.log(currentWeatherData);
+						const mainCardData = {
+							name: result[0].name.toUpperCase(),
+							description: currentWeatherData.weather[0].description.toUpperCase(),
+							temperature: Math.ceil(currentWeatherData.main.temp - 273.15),
+							maxTemperature: Math.floor(currentWeatherData.main.temp_max - 273.15),
+							minTemperature: Math.ceil(currentWeatherData.main.temp_min - 273.15),
+							windSpeed: Math.ceil(currentWeatherData.wind.speed),
+							humidity: Math.ceil(currentWeatherData.main.humidity),
+							icon: null,
+						};
 						htmlSelectors.dayMain[0].text(`${result[0].name.toUpperCase()}`);
 						htmlSelectors.dayMain[1].text(`${currentWeatherData.weather[0].description.toUpperCase()}`);
 						for (const key in weatherIcons) {
@@ -140,6 +150,7 @@ if (
 								// console.log(key);
 								let icon = weatherIcons[key];
 								htmlSelectors.dayMain[2].addClass(icon.toString());
+								mainCardData.icon = icon;
 							}
 						}
 						htmlSelectors.dayMain[3].text(
@@ -156,15 +167,7 @@ if (
 						htmlSelectors.dayMain[6].text(
 							"HUMIDITY: " + Math.ceil(currentWeatherData.main.humidity) + " %"
 						);
-						const mainCardData = {
-							name: result[0].name.toUpperCase(),
-							description: currentWeatherData.weather[0].description.toUpperCase(),
-							temperature: Math.ceil(currentWeatherData.main.temp - 273.15),
-							maxTemperature: Math.floor(currentWeatherData.main.temp_max - 273.15),
-							minTemperature: Math.ceil(currentWeatherData.main.temp_min - 273.15),
-							windSpeed: Math.ceil(currentWeatherData.wind.speed),
-							humidity: Math.ceil(currentWeatherData.main.humidity),
-						};
+
 						window.localStorage.setItem("mainCardData", JSON.stringify(mainCardData));
 					})
 					.catch((error) => {
@@ -265,12 +268,12 @@ const displayStoredData = () => {
 
 	if (mainCardData) {
 		const mainCardSelectors = htmlSelectors.dayMain;
-		const { name, description, temperature, maxTemperature, minTemperature, windSpeed, humidity } =
+		const { name, description, temperature, maxTemperature, minTemperature, windSpeed, humidity, icon } =
 			mainCardData;
 
 		mainCardSelectors[0].text(name);
 		mainCardSelectors[1].text(description);
-		mainCardSelectors[2].removeClass().addClass(weatherIcons[description.toLowerCase()]);
+		htmlSelectors.dayMain[2].addClass(`bi ${icon.toString()}`);
 		mainCardSelectors[3].text("TEMPERATURE: " + temperature + " °C");
 		mainCardSelectors[4].text("MAX/MIN: " + maxTemperature + " °C " + minTemperature + " °C");
 		mainCardSelectors[5].text("WIND: " + windSpeed + " m/s");
@@ -279,6 +282,7 @@ const displayStoredData = () => {
 };
 
 displayStoredData();
+
 // Converts a UNIX timestamp to a formatted date string
 // Main part of the function timeConverter was taken from stack overflow and it was adapted to my code and my logic
 function timeConverter(UNIX_timestamp) {
